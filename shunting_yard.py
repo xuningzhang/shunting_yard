@@ -60,3 +60,21 @@ def infix_to_postfix(tokens: list[str]) -> list[str]:
                 posfixed_tokens.append(element)
     posfixed_tokens.extend(reversed(cache))
     return posfixed_tokens
+
+def evaluate_postfix(tokens: list[str]) -> float:
+    cache = []
+    for element in tokens:
+        match element:
+            case "+":
+                cache.append(float(cache.pop())+float(cache.pop()))
+            case "-":
+                cache.append(float(cache.pop(-2))-float(cache.pop()))
+            case "*":
+                cache.append(float(cache.pop())*float(cache.pop()))
+            case "/":
+                cache.append(float(cache.pop(-2))/float(cache.pop()))
+            case _:
+                cache.append(element)
+    if len(cache) > 1:
+        raise IndexError("Invalid expression")
+    return cache[0] #float
