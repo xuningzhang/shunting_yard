@@ -14,16 +14,13 @@ def tokenize(expression: str) -> list[str]:
                 if len(return_list) == 0:
                     return_list.append(element)
                 else:
-                    match return_list[-1][0]:
+                    match return_list[-1]:
                         case "+" | "/" | "*" | "(" | ")":
                             return_list.append(element)
-                        case "-":
+                        case _:
                             if operator_counter > 1:
                                 return_list[-1] += element
-                            else:
-                                return_list.append(element)
-                        case _:
-                            if operator_counter == 0: #if the last added element is a number:
+                            elif operator_counter == 0: #if the last added element is a number:
                                 return_list[-1] += element
                             else:
                                 return_list.append(element)
