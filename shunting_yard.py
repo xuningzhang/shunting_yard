@@ -32,11 +32,6 @@ def infix_to_postfix(tokens: list[str]) -> list[str]:
     posfixed_tokens = []     #return list
     for element in tokens:
         match element:
-            case "-" | "+" :
-                priority = "-+*/"
-            case "*" | "/" :
-                priority = "*/"
-        match element:
             case "(" :
                 cache.append(element)
             case ")" :
@@ -44,6 +39,11 @@ def infix_to_postfix(tokens: list[str]) -> list[str]:
                     posfixed_tokens.append(cache.pop())
                 del cache[-1]
             case "+" | "-" | "/" | "*" :
+                match element:
+                    case "-" | "+" :
+                        priority = "-+*/"
+                    case "*" | "/" :
+                        priority = "*/"
                 condition = True
                 while condition:
                     if len(cache) <= 0:
