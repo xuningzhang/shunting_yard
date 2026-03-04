@@ -24,7 +24,7 @@ def main():
 
         #if expression doesn't contain any unwanted symbol.
         for element in expression.replace(" ",""):
-            if element not in "1234567890-+*/().":
+            if element not in "1234567890-+*/().,":
                 raise Unknown_operator("Opérateur inconnue")
 
         #if all parentesis are paired.

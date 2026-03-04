@@ -74,4 +74,4 @@ def evaluate_postfix(tokens: list[str]) -> float:
                 cache.append(element)
     if len(cache) > 1:
         raise IndexError("Invalid expression")
-    return cache[0] #float
+    return float(cache[0]) #float
