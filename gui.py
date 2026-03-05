@@ -13,7 +13,7 @@ def evaluate(expression : str) -> tuple[list[str], float]:
     result = shunting_yard.evaluate_postfix(postfixed)
     return postfixed, result
 
-def main():
+def button_command():
     #erase old expression
     postfixed_expression_box.config(text="Expression postfixée: ---")
     result_box.config(text="Résultat: ---")
@@ -59,7 +59,7 @@ input_text = tk.StringVar()
 
 name = tk.Label(calculator, text="Calculatrice super bien faite!!!\nVeuillez entrer votre expression mathématique.")
 input_box = tk.Entry(calculator, textvariable= input_text)
-convert_button = tk.Button(calculator, text= "Convertir l'expression en expression postfixé", command= main)
+convert_button = tk.Button(calculator, text= "Convertir l'expression en expression postfixé", command= button_command)
 postfixed_expression_box = tk.Label(calculator, text= "Expression postfixée: ---")
 result_box = tk.Label(calculator, text= "Résultat: ---")
 error_box = tk.Label(calculator, text= "Erreur: ---")

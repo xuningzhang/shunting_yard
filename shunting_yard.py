@@ -18,9 +18,7 @@ def tokenize(expression: str) -> list[str]:
                         case "+" | "/" | "*" | "(" | ")":
                             return_list.append(element)
                         case _:
-                            if operator_counter > 1:
-                                return_list[-1] += element
-                            elif operator_counter == 0: #if the last added element is a number:
+                            if operator_counter != 1:   #if the last one is a number or a "-" and there's more than one operator before it, it's a part of the number.
                                 return_list[-1] += element
                             else:
                                 return_list.append(element)
@@ -46,7 +44,7 @@ def infix_to_postfix(tokens: list[str]) -> list[str]:
                         priority = "*/"
                 condition = True
                 while condition:
-                    if len(cache) <= 0:
+                    if len(cache) == 0:
                         condition = False
                     elif cache[-1] in priority:
                         posfixed_tokens.append(cache.pop())
@@ -70,8 +68,8 @@ def evaluate_postfix(tokens: list[str]) -> float:
                 cache.append(float(cache.pop())*float(cache.pop()))
             case "/":
                 cache.append(float(cache.pop(-2))/float(cache.pop()))
-            case _:
+            case _: #if it's not an operator, it's a number, so we add it to the stack.
                 cache.append(element)
-    if len(cache) > 1:
+    if len(cache) > 1:  #if there's more than one element in the stack, it means that the expression is invalid, because all the numbers haven't been used.
         raise IndexError("Invalid expression")
     return float(cache[0]) #float
